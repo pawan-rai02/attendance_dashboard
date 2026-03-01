@@ -56,36 +56,11 @@ You do **not** need to know programming to use the dashboard once it is set up.
 
 ## 3. How to open and use the website
 
-### 3.1 If someone already installed it for you
+- **If the dashboard is already hosted for you**  
+  Ask your IT team or developer for the link (for example, `http://localhost:8000` or a college domain), open it in a browser, and then use the pages described below.
 
-If your **IT team or developer** has already set everything up:
-
-1. **Ask them for the link** to the dashboard. It might look like:
-   - `http://localhost:8000` (on the same computer), or
-   - `http://your-college-domain.com` (shared for the whole campus).
-2. Open the link in **Google Chrome**, **Edge**, or any modern browser.
-3. You will see the **Landing Page** with a summary of the system.
-
-You can now use all the pages described below without touching any code.
-
-### 3.2 If you are on this development machine (Windows)
-
-On this particular project, there is a simple way to start the site:
-
-1. Open the folder `attendance_dashboard`.
-2. **Double-click** the file `start.bat`.
-3. A **black terminal window** will open and show lines like:
-   - `Starting Attendance Analytics Dashboard...`
-   - `Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)`
-4. While this window stays open, the site is running.
-5. Open your browser and go to:
-   - **Landing page**: `http://localhost:8000`
-   - **Student dashboard**: `http://localhost:8000/student`
-   - **Class analytics**: `http://localhost:8000/analytics`
-
-To **stop** the site, click inside the black window and press `Ctrl + C`.
-
-> For a more detailed, step-by-step running guide (with screenshots in mind), see `RUN_INSTRUCTIONS.md`.
+- **If you want to run it on your own machine (development / Windows setup)**  
+  Please read `RUN_INSTRUCTIONS.md`. That file is the **single source of truth** for all installation and run commands (virtual environment, `start.bat`, manual `uvicorn`, database options, and troubleshooting).
 
 ---
 
@@ -274,30 +249,10 @@ attendance_dashboard/
 └── FRONTEND_INTEGRATION.md  # Detailed frontend wiring and customization
 ```
 
-### 8.3 Running locally (short version)
+### 8.3 Running locally (pointer only)
 
-For a **full technical setup**, including virtual environment and dependencies:
-
-1. Install **Python 3.9+**.
-2. In a terminal:
-   ```bash
-   cd attendance_dashboard
-   python -m venv venv
-   # Windows
-   venv\Scripts\activate
-   # Linux / Mac
-   # source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-3. Then either:
-   - Use `start.bat` (Windows) as explained earlier, **or**
-   - Run manually:
-     ```bash
-     cd backend
-     uvicorn main:app --reload --host 0.0.0.0 --port 8000
-     ```
-
-For deep technical topics such as **time complexity, scaling, security, SaaS multi-tenancy**, please read `TECHNICAL_DOCS.md`.
+- For **all setup and run commands** (virtual environment, `start.bat`, manual `uvicorn`, SQLite vs PostgreSQL), see `RUN_INSTRUCTIONS.md`.  
+- For deep technical topics such as **time complexity, scaling, security, SaaS multi-tenancy**, see `TECHNICAL_DOCS.md`.
 
 ---
 
