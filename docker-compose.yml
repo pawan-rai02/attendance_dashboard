@@ -1,0 +1,76 @@
+# Docker Compose for College Attendance Analytics Dashboard
+# Includes: API (with frontend), PostgreSQL
+
+version: '3.8'
+
+services:
+  # ===========================================
+  # PostgreSQL Database
+  # ===========================================
+  db:
+    image: postgres:15-alpine
+    container_name: attendance_db
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-attendance_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - attendance_network
+
+  # ===========================================
+  # FastAPI Backend (with Frontend)
+  # ===========================================
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: attendance_api
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@db:5432/${DB_NAME:-attendance_db}
+      HOST: 0.0.0.0
+      PORT: 8000
+      DEBUG: ${DEBUG:-false}
+      SEED_DATA: ${SEED_DATA:-true}
+      ALLOWED_ORIGINS: http://localhost:8000,http://localhost:8501,http://localhost:3000
+    ports:
+      - "${API_PORT:-8000}:8000"
+    volumes:
+      - ./backend:/app/backend
+      - ./static:/app/static
+      - ./ml:/app/ml
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - attendance_network
+    command: >
+      sh -c "cd backend && uvicorn main:app --host 0.0.0.0 --port 8000 --workers 2"
+
+# ===========================================
+# Volumes
+# ===========================================
+volumes:
+  postgres_data:
+    driver: local
+
+# ===========================================
+# Networks
+# ===========================================
+networks:
+  attendance_network:
+    driver: bridge

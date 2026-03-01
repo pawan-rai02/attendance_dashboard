@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Attendance Dashboard{% endblock %}
+
+{% block page_id %}landing{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <h1 class="hero-title">College Attendance Analytics Dashboard</h1>
+    <p class="hero-subtitle">
+        Track, analyze, and predict student attendance with powerful insights.
+        Identify at-risk students before it's too late.
+    </p>
+    <div class="hero-buttons">
+        <a href="/student" class="btn btn-light btn-lg">
+            👤 View Student Dashboard
+        </a>
+        <a href="/analytics" class="btn btn-outline-light btn-lg">
+            📈 Class Analytics
+        </a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <h2 class="text-center mb-4">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">👤</div>
+                <h3 class="feature-title">Student Tracking</h3>
+                <p class="feature-description">
+                    View individual student attendance across all subjects with detailed breakdowns and trends.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚠️</div>
+                <h3 class="feature-title">Risk Assessment</h3>
+                <p class="feature-description">
+                    Identify students at risk of falling below 75% attendance with mathematical predictions.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Class Analytics</h3>
+                <p class="feature-description">
+                    Monitor class-wide attendance patterns and subject-wise performance metrics.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">ML Predictions</h3>
+                <p class="feature-description">
+                    Machine learning model predicts shortage probability with explainable features.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Dashboard Summary Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Live Dashboard Summary</h2>
+        <div id="stats-container" class="stats-grid">
+            <div class="loading">
+                <div class="spinner"></div>
+                <span class="loading-text">Loading stats...</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Defaulters Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="mb-4">Students Requiring Attention</h2>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title mb-0">⚠️ Low Attendance Students</h3>
+            </div>
+            <div id="defaulters-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <span class="loading-text">Loading defaulters...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="mb-3">Ready to Get Started?</h2>
+        <p class="text-muted mb-4">
+            Explore student attendance details or view class-wide analytics.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="/student" class="btn btn-primary btn-lg">
+                👤 Student Dashboard
+            </a>
+            <a href="/analytics" class="btn btn-outline-primary btn-lg">
+                📈 Class Analytics
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
