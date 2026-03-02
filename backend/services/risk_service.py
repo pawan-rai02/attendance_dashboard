@@ -78,11 +78,11 @@ class RiskAssessmentService:
             subject = self.db.query(Subject).filter(Subject.id == subject_id).first()
             subject_name = subject.subject_name if subject else None
         else:
-            # For overall: estimate based on average
-            avg_total = self.db.query(
-                func.avg(func.count(AttendanceRecord.id))
-            ).filter(AttendanceRecord.student_id == student_id).scalar() or 60
-            classes_remaining = max(0, int(avg_total) - total_classes)
+            # For overall: estimate remaining classes using a simple fallback
+            # Using a nested aggregate like avg(count(*)) is not portable across SQLite,
+            # so we approximate with a reasonable default target of 60 total classes.
+            estimated_total = 60
+            classes_remaining = max(0, estimated_total - total_classes)
             subject_name = None
 
         # Calculate minimum classes needed to reach 75%

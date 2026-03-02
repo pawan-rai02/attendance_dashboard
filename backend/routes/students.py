@@ -40,24 +40,22 @@ def create_student(
     - **semester**: Semester number (1-8)
     """
     service = StudentService(db)
-    
-    # Check for duplicates
+
+    # Check for duplicate roll number
     if service.get_by_roll_number(student_data.roll_number):
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail=f"Roll number '{student_data.roll_number}' already exists"
         )
-    
-    if service.get_by_id(student_data.semester):  # type: ignore
-        existing = db.query(StudentService).filter(
-            StudentService.email == student_data.email  # type: ignore
-        ).first()
-        if existing:
-            raise HTTPException(
-                status_code=status.HTTP_409_CONFLICT,
-                detail=f"Email '{student_data.email}' already exists"
-            )
-    
+
+    # Check for duplicate email
+    existing_email = db.query(Student).filter(Student.email == student_data.email).first()
+    if existing_email:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=f"Email '{student_data.email}' already exists"
+        )
+
     student = service.create(student_data)
     return StudentResponse.model_validate(student)
 
@@ -91,10 +89,9 @@ def get_students(
         department=department,
         semester=semester
     )
-    
-    total = db.query(service.db.query(StudentService).model).filter(
-        StudentService.is_active == True  # type: ignore
-    ).count()
+
+    # Total active students (for pagination metadata)
+    total = db.query(Student).filter(Student.is_active == True).count()
     
     return PaginatedResponse(
         items=[StudentResponse.model_validate(s) for s in students],
