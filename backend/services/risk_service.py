@@ -68,21 +68,32 @@ class RiskAssessmentService:
         classes_present = stats.present or 0
         current_pct = (classes_present / total_classes * 100) if total_classes > 0 else 0.0
 
-        # Get remaining classes
+        # Get remaining classes (clamped to 10–15 for UI clarity)
+        today = date.today()
         if subject_id:
-            # For subject-specific: get scheduled classes
-            scheduled = self.db.query(func.count(ClassSchedule.id)).filter(
-                ClassSchedule.subject_id == subject_id
-            ).scalar()
-            classes_remaining = max(0, (scheduled or 60) - total_classes)
+            # Subject-specific: future scheduled classes for this subject
+            future = self.db.query(func.count(ClassSchedule.id)).filter(
+                ClassSchedule.subject_id == subject_id,
+                ClassSchedule.date > today,
+            ).scalar() or 0
+            raw_remaining = future
+            classes_remaining = max(10, min(raw_remaining or 12, 15))
             subject = self.db.query(Subject).filter(Subject.id == subject_id).first()
             subject_name = subject.subject_name if subject else None
         else:
-            # For overall: estimate remaining classes using a simple fallback
-            # Using a nested aggregate like avg(count(*)) is not portable across SQLite,
-            # so we approximate with a reasonable default target of 60 total classes.
-            estimated_total = 60
-            classes_remaining = max(0, estimated_total - total_classes)
+            # Overall: future scheduled classes across all subjects in the student's department
+            future = (
+                self.db.query(func.count(ClassSchedule.id))
+                .join(Subject, ClassSchedule.subject_id == Subject.id)
+                .filter(
+                    Subject.department == student.department,
+                    ClassSchedule.date > today,
+                )
+                .scalar()
+                or 0
+            )
+            raw_remaining = future
+            classes_remaining = max(10, min(raw_remaining or 12, 15))
             subject_name = None
 
         # Calculate minimum classes needed to reach 75%

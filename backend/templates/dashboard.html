@@ -5,17 +5,24 @@
 {% block page_id %}analytics{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="analytics-container">
     <!-- Page Header -->
     <div class="page-header">
-        <h1 class="page-title">📈 Class Analytics</h1>
-        <p class="page-subtitle">View subject-wise attendance statistics and class-wide insights</p>
+        <div class="page-header-content">
+            <span class="page-badge">Analytics</span>
+            <h1 class="page-title">Class Analytics</h1>
+            <p class="page-subtitle">Dark glass dashboards with subject-wise insights and risk distribution.</p>
+        </div>
+        <div class="page-header-visual">
+            <div class="visual-orb"></div>
+            <div class="visual-ring"></div>
+        </div>
     </div>
 
     <!-- Class Analytics Content -->
-    <div id="class-analytics-content">
-        <div class="loading">
-            <div class="spinner"></div>
+    <div id="class-analytics-content" class="analytics-content">
+        <div class="loading-state">
+            <div class="loading-spinner"></div>
             <span class="loading-text">Loading class analytics...</span>
         </div>
     </div>

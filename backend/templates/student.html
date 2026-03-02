@@ -5,43 +5,92 @@
 {% block page_id %}student{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="student-container">
     <!-- Page Header -->
     <div class="page-header">
-        <h1 class="page-title">👤 Student Dashboard</h1>
-        <p class="page-subtitle">View individual student attendance details, trends, and risk assessment</p>
+        <div class="page-header-content">
+            <span class="page-badge">Dashboard</span>
+            <h1 class="page-title">
+                <span class="gradient-text">👤 Student Dashboard</span>
+            </h1>
+            <p class="page-subtitle">View individual student attendance details, trends, and risk assessment</p>
+        </div>
     </div>
 
     <!-- Student Selection Card -->
-    <div class="card mb-4">
+    <div class="card glass-card mb-4">
         <div class="card-header">
-            <h3 class="card-title mb-0">Select Student</h3>
+            <h3 class="card-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+                Select Student
+            </h3>
         </div>
         <div class="card-body">
-            <div class="row align-items-end">
-                <div class="col-md-6">
-                    <div class="form-group mb-0">
-                        <label for="student-select" class="form-label">Choose a Student</label>
+            <div class="student-select-wrapper">
+                <div class="form-group mb-0">
+                    <label for="student-select" class="form-label">Choose a Student</label>
+                    <div class="select-wrapper">
                         <select id="student-select" class="form-select form-select-lg">
                             <option value="">-- Select a Student --</option>
                         </select>
+                        <div class="select-arrow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="alert alert-info mb-0">
-                        <span>ℹ️</span>
-                        <span>Select a student to view their complete attendance analytics</span>
-                    </div>
+                <div class="info-pill">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+                    </svg>
+                    <span>Select a student to view their complete attendance analytics</span>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Student Attendance Content -->
-    <div id="student-attendance-content">
-        <div class="alert alert-info">
-            <span>👈</span>
-            <span>Please select a student from the dropdown above to view their attendance details.</span>
+    <div id="student-attendance-content" class="student-attendance-content">
+        <div class="empty-state glass-card">
+            <div class="empty-state-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+            </div>
+            <h3 class="empty-state-title">No Student Selected</h3>
+            <p class="empty-state-text">Please select a student from the dropdown above to view their attendance details.</p>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <button class="fab-main" id="student-fab" aria-label="Student actions">
+            <svg class="fab-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 5v14M5 12h14"/>
+            </svg>
+        </button>
+        <div class="fab-menu" id="student-fab-menu">
+            <button class="fab-menu-item" data-action="create">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"/>
+                </svg>
+                <span>Create Student</span>
+            </button>
+            <button class="fab-menu-item" data-action="update">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+                </svg>
+                <span>Update Student</span>
+            </button>
+            <button class="fab-menu-item" data-action="delete">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                </svg>
+                <span>Delete Student</span>
+            </button>
         </div>
     </div>
 </div>

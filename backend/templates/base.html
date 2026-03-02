@@ -3,37 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Attendance Dashboard{% endblock %}</title>
-    
+    <title>{% block title %}Attendance AI{% endblock %}</title>
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
-    
+
+    <!-- GSAP for smooth animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+
     {% block extra_css %}{% endblock %}
 </head>
 <body data-page="{% block page_id %}{% endblock %}">
+    <!-- Glowing cursor effect -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="main-navbar">
         <div class="navbar-container">
             <a href="/" class="navbar-brand">
-                <span>📊</span>
-                <span>Attendance Dashboard</span>
+                <span class="navbar-logo">
+                    <span class="logo-square"></span>
+                </span>
+                <span class="brand-text">Attendance AI</span>
             </a>
             <ul class="navbar-nav">
-                <li><a href="/" class="nav-link {% if request.url.path == '/' %}active{% endif %}">🏠 Home</a></li>
-                <li><a href="/student" class="nav-link {% if request.url.path == '/student' %}active{% endif %}">👤 Student</a></li>
-                <li><a href="/analytics" class="nav-link {% if request.url.path == '/analytics' %}active{% endif %}">📈 Analytics</a></li>
-                <li><a href="/docs" class="nav-link" target="_blank">📡 API Docs</a></li>
+                <li><a href="/" class="nav-link {% if request.url.path == '/' %}active{% endif %}">Dashboard</a></li>
+                <li><a href="/student" class="nav-link {% if request.url.path == '/student' %}active{% endif %}">Student</a></li>
+                <li><a href="/analytics" class="nav-link {% if request.url.path == '/analytics' %}active{% endif %}">Analytics</a></li>
+                <li><a href="/docs" class="nav-link" target="_blank">Docs</a></li>
+                <li><a href="#contact-footer" class="nav-link">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -44,21 +50,48 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <p class="footer-text mb-0">
-            College Attendance Analytics Dashboard | Built with FastAPI + Chart.js
-        </p>
+    <footer class="footer" id="contact-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="navbar-logo">
+                    <span class="logo-square"></span>
+                </span>
+                <span class="brand-text">Attendance AI</span>
+            </div>
+            <div class="footer-icons">
+                <a href="mailto:pawanvirat32@gmail.com" class="footer-icon" title="Email">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    </svg>
+                </a>
+                <a href="https://instagram.com/pawanrai02_" target="_blank" class="footer-icon" title="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/pawan-rai02" target="_blank" class="footer-icon" title="GitHub">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/pawanrai02" target="_blank" class="footer-icon" title="LinkedIn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="footer-text">
+                © 2026 Pawan Rai | Built with FastAPI + ML
+            </p>
+        </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script src="{{ url_for('static', path='/js/app.js') }}"></script>
-    
+
     {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -1,71 +1,159 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Attendance Dashboard{% endblock %}
+{% block title %}Attendance AI - Smart Attendance Intelligence{% endblock %}
 
 {% block page_id %}landing{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero">
-    <h1 class="hero-title">College Attendance Analytics Dashboard</h1>
-    <p class="hero-subtitle">
-        Track, analyze, and predict student attendance with powerful insights.
-        Identify at-risk students before it's too late.
-    </p>
-    <div class="hero-buttons">
-        <a href="/student" class="btn btn-light btn-lg">
-            👤 View Student Dashboard
-        </a>
-        <a href="/analytics" class="btn btn-outline-light btn-lg">
-            📈 Class Analytics
-        </a>
+<section class="hero-section" id="hero">
+    <!-- Animated background gradient -->
+    <div class="hero-bg-gradient"></div>
+    
+    <!-- Floating particles container -->
+    <div class="particles-container" id="particles"></div>
+    
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="badge-dot"></span>
+            <span>AI-Powered Analytics</span>
+        </div>
+        
+        <h1 class="hero-title">
+            Predict Attendance<br>
+            <span class="gradient-text">Before It Drops.</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+            AI-powered attendance intelligence for smarter academic decisions.
+            Spot defaulters early, act with data, and keep classes on track.
+        </p>
+        
+        <div class="hero-cta">
+            <a href="/student" class="btn btn-primary-glow btn-lg">
+                <span>View Dashboard</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+            <a href="/analytics" class="btn btn-outline-glow btn-lg">
+                View Analytics
+            </a>
+            <a href="#contact-footer" class="btn btn-ghost btn-lg">
+                Contact Me
+            </a>
+        </div>
+        
+        <!-- Hero metrics -->
+        <div class="hero-metrics">
+            <div class="hero-metric-card glass-card">
+                <div class="metric-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                    </svg>
+                </div>
+                <div class="metric-info">
+                    <span class="metric-value">1000+</span>
+                    <span class="metric-label">Students Simulated</span>
+                </div>
+            </div>
+            <div class="hero-metric-card glass-card">
+                <div class="metric-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                    </svg>
+                </div>
+                <div class="metric-info">
+                    <span class="metric-value">Real-time</span>
+                    <span class="metric-label">Risk Engine</span>
+                </div>
+            </div>
+            <div class="hero-metric-card glass-card">
+                <div class="metric-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/>
+                    </svg>
+                </div>
+                <div class="metric-info">
+                    <span class="metric-value">95%</span>
+                    <span class="metric-label">Prediction Accuracy</span>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    <!-- Decorative elements -->
+    <div class="hero-glow-orb hero-glow-orb-1"></div>
+    <div class="hero-glow-orb hero-glow-orb-2"></div>
 </section>
 
 <!-- Features Section -->
-<section class="features">
+<section class="features-section">
     <div class="container">
-        <h2 class="text-center mb-4">Key Features</h2>
+        <div class="section-header">
+            <span class="section-badge">Features</span>
+            <h2 class="section-title">Everything You Need</h2>
+            <p class="section-subtitle">Powerful features to keep your attendance on track</p>
+        </div>
+        
         <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">👤</div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon-wrapper">
+                    <div class="feature-icon">👤</div>
+                </div>
                 <h3 class="feature-title">Student Tracking</h3>
                 <p class="feature-description">
                     View individual student attendance across all subjects with detailed breakdowns and trends.
                 </p>
+                <div class="feature-glow"></div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚠️</div>
+            
+            <div class="feature-card glass-card">
+                <div class="feature-icon-wrapper">
+                    <div class="feature-icon">⚠️</div>
+                </div>
                 <h3 class="feature-title">Risk Assessment</h3>
                 <p class="feature-description">
                     Identify students at risk of falling below 75% attendance with mathematical predictions.
                 </p>
+                <div class="feature-glow"></div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
+            
+            <div class="feature-card glass-card">
+                <div class="feature-icon-wrapper">
+                    <div class="feature-icon">📊</div>
+                </div>
                 <h3 class="feature-title">Class Analytics</h3>
                 <p class="feature-description">
                     Monitor class-wide attendance patterns and subject-wise performance metrics.
                 </p>
+                <div class="feature-glow"></div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
+            
+            <div class="feature-card glass-card">
+                <div class="feature-icon-wrapper">
+                    <div class="feature-icon">🤖</div>
+                </div>
                 <h3 class="feature-title">ML Predictions</h3>
                 <p class="feature-description">
                     Machine learning model predicts shortage probability with explainable features.
                 </p>
+                <div class="feature-glow"></div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Dashboard Summary Section -->
-<section class="py-5 bg-light">
+<section class="stats-section">
     <div class="container">
-        <h2 class="text-center mb-4">Live Dashboard Summary</h2>
+        <div class="section-header">
+            <span class="section-badge">Live Data</span>
+            <h2 class="section-title">Dashboard Summary</h2>
+        </div>
         <div id="stats-container" class="stats-grid">
-            <div class="loading">
-                <div class="spinner"></div>
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
                 <span class="loading-text">Loading stats...</span>
             </div>
         </div>
@@ -73,37 +161,25 @@
 </section>
 
 <!-- Defaulters Section -->
-<section class="py-5">
+<section class="defaulters-section">
     <div class="container">
-        <h2 class="mb-4">Students Requiring Attention</h2>
-        <div class="card">
+        <div class="section-header">
+            <span class="section-badge">Alerts</span>
+            <h2 class="section-title">Students Requiring Attention</h2>
+        </div>
+        <div class="card glass-card">
             <div class="card-header">
-                <h3 class="card-title mb-0">⚠️ Low Attendance Students</h3>
+                <h3 class="card-title">
+                    <span class="icon-pulse">⚠️</span>
+                    Low Attendance Students
+                </h3>
             </div>
             <div id="defaulters-container">
-                <div class="loading">
-                    <div class="spinner"></div>
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
                     <span class="loading-text">Loading defaulters...</span>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA Section -->
-<section class="py-5 bg-light">
-    <div class="container text-center">
-        <h2 class="mb-3">Ready to Get Started?</h2>
-        <p class="text-muted mb-4">
-            Explore student attendance details or view class-wide analytics.
-        </p>
-        <div class="d-flex justify-content-center gap-3">
-            <a href="/student" class="btn btn-primary btn-lg">
-                👤 Student Dashboard
-            </a>
-            <a href="/analytics" class="btn btn-outline-primary btn-lg">
-                📈 Class Analytics
-            </a>
         </div>
     </div>
 </section>
